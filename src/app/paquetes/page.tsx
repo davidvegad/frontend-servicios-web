@@ -9,7 +9,7 @@ interface Paquete {
 }
 
 async function getPaquetes(): Promise<Paquete[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paquetes/`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paquetes/`, { cache: 'force-cache' });
   if (!res.ok) {
     throw new Error('Failed to fetch paquetes');
   }
