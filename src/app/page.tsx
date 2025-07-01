@@ -40,7 +40,7 @@ interface PreguntaFrecuente {
 
 // Funciones para obtener datos (ahora llamadas en el cliente)
 async function getServicios(): Promise<Servicio[]> {
-  const serviciosRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servicios/`, { cache: 'force-cache' });
+  const serviciosRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servicios/`, { cache: 'no-store' });
   if (!serviciosRes.ok) {
     throw new Error('Failed to fetch servicios');
   }
@@ -48,7 +48,7 @@ async function getServicios(): Promise<Servicio[]> {
 }
 
 async function getPaquetes(): Promise<Paquete[]> {
-  const paquetesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paquetes/`, { cache: 'force-cache' });
+  const paquetesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paquetes/`, { cache: 'no-store' });
   if (!paquetesRes.ok) {
     throw new Error('Failed to fetch paquetes');
   }
@@ -57,7 +57,7 @@ async function getPaquetes(): Promise<Paquete[]> {
 
 
 async function getArticulosBlog(): Promise<ArticuloBlog[]> {
-  const blogRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'force-cache' });
+  const blogRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'no-store' });
   if (!blogRes.ok) {
     throw new Error('Failed to fetch blog articles');
   }
@@ -65,7 +65,7 @@ async function getArticulosBlog(): Promise<ArticuloBlog[]> {
 }
 
 async function getPreguntasFrecuentes(): Promise<PreguntaFrecuente[]> {
-  const faqRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/preguntas-frecuentes/`, { cache: 'force-cache' });
+  const faqRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/preguntas-frecuentes/`, { cache: 'no-store' });
   if (!faqRes.ok) {
     throw new Error('Failed to fetch preguntas frecuentes');
   }
