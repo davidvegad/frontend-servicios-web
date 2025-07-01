@@ -55,6 +55,7 @@ async function getPaquetes(): Promise<Paquete[]> {
   return paquetesRes.json();
 }
 
+
 async function getArticulosBlog(): Promise<ArticuloBlog[]> {
   const blogRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'no-store' });
   if (!blogRes.ok) {
