@@ -20,8 +20,18 @@ async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
 }
 
 export async function generateStaticParams() {
+  console.log('Attempting to fetch blog articles for generateStaticParams...');
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'no-store' });
+  
+  if (!res.ok) {
+    console.error(`Failed to fetch blog articles: ${res.status} ${res.statusText}`);
+    // Consider returning an empty array or re-throwing if this is a critical failure
+    return []; 
+  }
+
   const articulos: ArticuloBlog[] = await res.json();
+  console.log('Fetched articles for generateStaticParams:', articulos.length, 'articles');
+  console.log('First article slug:', articulos.length > 0 ? articulos[0].slug : 'N/A');
 
   return articulos.map((articulo) => ({
     slug: articulo.slug,
