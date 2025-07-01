@@ -12,7 +12,7 @@ interface ArticuloBlog {
 }
 
 async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`, { cache: 'no-store' });
   if (!res.ok) {
     throw new Error('Failed to fetch blog article');
   }
@@ -20,7 +20,7 @@ async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch('http://localhost:8000/api/servicios/blog/');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'no-store' });
   const articulos: ArticuloBlog[] = await res.json();
 
   return articulos.map((articulo) => ({
