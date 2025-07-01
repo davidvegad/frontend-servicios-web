@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 interface ArticuloBlog {
   id: number;
@@ -55,11 +54,10 @@ const ArticuloBlogPage = async ({ params }: { params: { slug: string } }) => {
     <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
       {articulo.imagen_destacada && (
         <div className="relative w-full h-96 mb-6">
-          <Image
+          <img
             src={articulo.imagen_destacada}
             alt={articulo.titulo}
-            fill
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
             className="rounded-md"
           />
         </div>
