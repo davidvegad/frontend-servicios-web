@@ -21,21 +21,31 @@ async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
 
 export async function generateStaticParams() {
   console.log('Attempting to fetch blog articles for generateStaticParams...');
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`, { cache: 'no-store' });
-  
-  if (!res.ok) {
-    console.error(`Failed to fetch blog articles: ${res.status} ${res.statusText}`);
-    // Consider returning an empty array or re-throwing if this is a critical failure
-    return []; 
+  try {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
+      console.error('NEXT_PUBLIC_API_URL is not defined during generateStaticParams build!');
+      return []; // Return empty array if API URL is missing
+    }
+
+    const res = await fetch(`${apiUrl}/blog/`, { cache: 'no-store' });
+
+    if (!res.ok) {
+      console.error(`Failed to fetch blog articles: ${res.status} ${res.statusText}`);
+      return []; // Return empty array if response is not OK
+    }
+
+    const articulos: ArticuloBlog[] = await res.json();
+    console.log('Fetched articles for generateStaticParams:', articulos.length, 'articles');
+    console.log('First article slug:', articulos.length > 0 ? articulos[0].slug : 'N/A');
+
+    return articulos.map((articulo) => ({
+      slug: articulo.slug,
+    }));
+  } catch (error) {
+    console.error('Error in generateStaticParams:', error);
+    return []; // Crucially, return an empty array on any error to prevent build failure
   }
-
-  const articulos: ArticuloBlog[] = await res.json();
-  console.log('Fetched articles for generateStaticParams:', articulos.length, 'articles');
-  console.log('First article slug:', articulos.length > 0 ? articulos[0].slug : 'N/A');
-
-  return articulos.map((articulo) => ({
-    slug: articulo.slug,
-  }));
 }
 
 const ArticuloBlogPage = async ({ params }: { params: { slug: string } }) => {
