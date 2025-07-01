@@ -40,35 +40,35 @@ interface PreguntaFrecuente {
 
 // Funciones para obtener datos (ahora llamadas en el cliente)
 async function getServicios(): Promise<Servicio[]> {
-  const res = await fetch('http://localhost:8000/api/servicios/servicios/');
-  if (!res.ok) {
+  const serviciosRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servicios/`);
+  if (!serviciosRes.ok) {
     throw new Error('Failed to fetch servicios');
   }
-  return res.json();
+  return serviciosRes.json();
 }
 
 async function getPaquetes(): Promise<Paquete[]> {
-  const res = await fetch('http://localhost:8000/api/servicios/paquetes/');
-  if (!res.ok) {
+  const paquetesRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/paquetes/`);
+  if (!paquetesRes.ok) {
     throw new Error('Failed to fetch paquetes');
   }
-  return res.json();
+  return paquetesRes.json();
 }
 
 async function getArticulosBlog(): Promise<ArticuloBlog[]> {
-  const res = await fetch('http://localhost:8000/api/servicios/blog/');
-  if (!res.ok) {
+  const blogRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/`);
+  if (!blogRes.ok) {
     throw new Error('Failed to fetch blog articles');
   }
-  return res.json();
+  return blogRes.json();
 }
 
 async function getPreguntasFrecuentes(): Promise<PreguntaFrecuente[]> {
-  const res = await fetch('http://localhost:8000/api/servicios/preguntas-frecuentes/');
-  if (!res.ok) {
+  const faqRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/preguntas-frecuentes/`);
+  if (!faqRes.ok) {
     throw new Error('Failed to fetch preguntas frecuentes');
   }
-  return res.json();
+  return faqRes.json();
 }
 
 // Componentes de contenido para cada sección

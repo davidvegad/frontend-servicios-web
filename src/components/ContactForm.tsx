@@ -20,7 +20,7 @@ const ContactForm = () => {
     setStatus('Enviando...');
 
     try {
-      const response = await fetch('http://localhost:8000/api/servicios/contacto/', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/contacto/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

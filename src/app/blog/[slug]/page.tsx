@@ -12,7 +12,7 @@ interface ArticuloBlog {
 }
 
 async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
-  const res = await fetch(`http://localhost:8000/api/servicios/blog/${slug}/`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`);
   if (!res.ok) {
     throw new Error('Failed to fetch blog article');
   }

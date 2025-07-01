@@ -7,7 +7,7 @@ interface PreguntaFrecuente {
 }
 
 async function getPreguntasFrecuentes(): Promise<PreguntaFrecuente[]> {
-  const res = await fetch('http://localhost:8000/api/servicios/preguntas-frecuentes/');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/preguntas-frecuentes/`);
   if (!res.ok) {
     throw new Error('Failed to fetch preguntas frecuentes');
   }
