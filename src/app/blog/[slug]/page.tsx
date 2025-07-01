@@ -11,7 +11,7 @@ interface ArticuloBlog {
 }
 
 async function getArticuloBlog(slug: string): Promise<ArticuloBlog> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/${slug}/`, { cache: 'force-cache' });
   if (!res.ok) {
     throw new Error('Failed to fetch blog article');
   }
@@ -27,7 +27,7 @@ export async function generateStaticParams() {
       return []; // Return empty array if API URL is missing
     }
 
-    const res = await fetch(`${apiUrl}/blog/`, { cache: 'no-store' });
+    const res = await fetch(`${apiUrl}/blog/`, { cache: 'force-cache' });
 
     if (!res.ok) {
       console.error(`Failed to fetch blog articles: ${res.status} ${res.statusText}`);

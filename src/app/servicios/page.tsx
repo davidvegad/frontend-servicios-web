@@ -8,7 +8,7 @@ interface Servicio {
 }
 
 async function getServicios(): Promise<Servicio[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servicios/`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/servicios/`, { cache: 'force-cache' });
   if (!res.ok) {
     throw new Error('Failed to fetch servicios');
   }
